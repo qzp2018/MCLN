@@ -2,7 +2,7 @@ Multi-branch Collaborative Learning Network for 3D Visual Grounding
 =========
 :tada::tada::tada:
 This is a PyTorch implementation of MCLN proposed by our paper ["Multi-branch Collaborative Learning Network for 3D Visual Grounding"].**(ECCV2024)**
-![image](https://github.com/qzp2018/MCLN/data/fig.png)
+![image](https://github.com/qzp2018/MCLN/blob/main/data/fig.png)
 ## 0. Installation
 
 + **(1)** Install environment with `environment.yml` file:
