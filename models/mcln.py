@@ -147,7 +147,15 @@ class MCLN(nn.Module):
         self.self_position_embedding = self_position_embedding
         self.contrastive_align_loss = contrastive_align_loss
         self.butd = butd
-
+#-------------------text-head decoder-------------------------------------
+        self.out_norm = nn.LayerNorm(d_model)
+        self.out_score = nn.Sequential(nn.Linear(d_model, d_model), nn.ReLU(), nn.Linear(d_model, 1))
+        self.swa_layers = nn.ModuleList([])
+        self.swa_ffn_layers = nn.ModuleList([])
+        self.rel_encoder = nn.Sequential(nn.Linear(3, 64), nn.ReLU(), nn.Linear(64, 288))
+        for i in range(3):
+            self.swa_layers.append(SWA(d_model, nhead=8,dropout=0.2))
+            self.swa_ffn_layers.append(FFN(d_model, hidden_dim=128, dropout=0.2, activation_fn='relu'))
         # Visual encoder
         self.backbone_net = Pointnet2Backbone(
             input_feature_dim=input_feature_dim,
