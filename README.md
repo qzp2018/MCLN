@@ -93,7 +93,7 @@ The final required files are as follows:
     ```
 + **[3] ScanRefer**: Download ScanRefer annotations following the instructions [HERE](https://github.com/daveredrum/ScanRefer). Unzip inside `[DATA_ROOT]`.
 + **[4] ReferIt3D**: Download ReferIt3D annotations following the instructions [HERE](https://github.com/referit3d/referit3d). Unzip inside `[DATA_ROOT]`.
-+ **[5] group_free_pred_bboxes**: Download [object detector's outputs](https://1drv.ms/u/s!AsnjK0KGPk10gYBjpUjJm7TkADS8vg?e=1AXJdR). Unzip inside `[DATA_ROOT]`. (not used in single-stage method)
++ **[5] group_free_pred_bboxes**: Download [object detector's outputs](https://drive.google.com/drive/folders/1vfOeTLKdW2AFoQPoivxT5sFloeZSXnEf). Unzip inside `[DATA_ROOT]`. (not used in single-stage method)
 + **[6] gf_detector_l6o256.pth**: Download PointNet++ [checkpoint](https://1drv.ms/u/s!AsnjK0KGPk10gYBXZWDnWle7SvCNBg?e=SNyUK8) into `[DATA_ROOT]`.
 + **[7] roberta-base**: Download the roberta pytorch model:
   ```
