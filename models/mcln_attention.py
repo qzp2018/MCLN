@@ -13,6 +13,75 @@ from torch.nn.functional import _in_projection_packed,linear,pad
 from torch.overrides import (
     has_torch_function, has_torch_function_unary, has_torch_function_variadic,
     handle_torch_function)
+from torch import _VF
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from torch.types import _dtype as DType
+else:
+    # The JIT doesn't understand Union, nor torch.dtype here
+    DType = int
+
+# Activation functions
+def dropout(input: Tensor, p: float = 0.5, training: bool = True, inplace: bool = False) -> Tensor:
+    r"""
+    During training, randomly zeroes some of the elements of the input
+    tensor with probability :attr:`p` using samples from a Bernoulli
+    distribution.
+
+    See :class:`~torch.nn.Dropout` for details.
+
+    Args:
+        p: probability of an element to be zeroed. Default: 0.5
+        training: apply dropout if is ``True``. Default: ``True``
+        inplace: If set to ``True``, will do this operation in-place. Default: ``False``
+    """
+    if has_torch_function_unary(input):
+        return handle_torch_function(dropout, (input,), input, p=p, training=training, inplace=inplace)
+    if p < 0.0 or p > 1.0:
+        raise ValueError("dropout probability has to be between 0 and 1, " "but got {}".format(p))
+    return _VF.dropout_(input, p, training) if inplace else _VF.dropout(input, p, training)
+
+
+
+
+def softmax(input: Tensor, dim: Optional[int] = None, _stacklevel: int = 3, dtype: Optional[DType] = None) -> Tensor:
+    r"""Applies a softmax function.
+
+    Softmax is defined as:
+
+    :math:`\text{Softmax}(x_{i}) = \frac{\exp(x_i)}{\sum_j \exp(x_j)}`
+
+    It is applied to all slices along dim, and will re-scale them so that the elements
+    lie in the range `[0, 1]` and sum to 1.
+
+    See :class:`~torch.nn.Softmax` for more details.
+
+    Args:
+        input (Tensor): input
+        dim (int): A dimension along which softmax will be computed.
+        dtype (:class:`torch.dtype`, optional): the desired data type of returned tensor.
+          If specified, the input tensor is casted to :attr:`dtype` before the operation
+          is performed. This is useful for preventing data type overflows. Default: None.
+
+    .. note::
+        This function doesn't work directly with NLLLoss,
+        which expects the Log to be computed between the Softmax and itself.
+        Use log_softmax instead (it's faster and has better numerical properties).
+
+    """
+    if has_torch_function_unary(input):
+        return handle_torch_function(softmax, (input,), input, dim=dim, _stacklevel=_stacklevel, dtype=dtype)
+    if dim is None:
+        dim = _get_softmax_dim("softmax", input.dim(), _stacklevel)
+    if dtype is None:
+        ret = input.softmax(dim)
+    else:
+        ret = input.softmax(dim, dtype=dtype)
+    return ret
+
+
+
+
 
 def _scaled_dot_product_attention(
     q: Tensor,
