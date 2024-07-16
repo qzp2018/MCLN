@@ -371,7 +371,7 @@ class QueryAndGroup(nn.Module):
         if self.ret_unique_cnt:
             ret.append(unique_cnt)
         if len(ret) == 1:
-            return ret[0]
+            return ret[0],idx
         else:
             return tuple(ret)
 
