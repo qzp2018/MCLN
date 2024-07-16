@@ -2,6 +2,7 @@ import warnings
 from typing import Optional, Tuple
 
 import torch
+import math
 from torch import Tensor
 from torch.nn.init import constant_, xavier_normal_, xavier_uniform_
 from torch.nn.parameter import Parameter
