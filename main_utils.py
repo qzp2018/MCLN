@@ -109,7 +109,7 @@ def parse_option():
     parser.add_argument('--val_freq', type=int, default=5)  # epoch-wise
 
     # others
-    parser.add_argument("--local_rank", type=int,default=1
+    parser.add_argument("--local_rank", type=int,default=1,
                         help='local rank for DistributedDataParallel')  # note
     parser.add_argument('--ap_iou_thresholds', type=float, default=[0.25, 0.5],
                         nargs='+', help='A list of AP IoU thresholds')
