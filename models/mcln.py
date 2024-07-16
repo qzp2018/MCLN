@@ -8,7 +8,7 @@
 # Copyright (c) 2021 Ze Liu. All Rights Reserved.
 # Licensed under the MIT License.
 # ------------------------------------------------------------------------
-from .torch.nn import MultiheadAttention
+from .mcln_attention import MultiheadAttention
 import numpy as np
 import math
 import torch
