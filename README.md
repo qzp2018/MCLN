@@ -5,16 +5,12 @@ This is a PyTorch implementation of MCLN proposed by our paper ["Multi-branch Co
 ![image](https://github.com/qzp2018/MCLN/blob/main/data/fig.png)
 ## 0. Installation
 
-+ **(1)** Install environment with `environment.yml` file:
-  ```
-  conda env create -f environment.yml --name mcln
-  ```
-  + or you can install manually:
++ **(1)** Install environment:
     ```
     conda create -n mcln python=3.7
     conda activate mcln
     conda install pytorch==1.9.0 torchvision==0.10.0 cudatoolkit=11.1 -c pytorch -c nvidia
-    pip install numpy ipython psutil traitlets transformers termcolor ipdb scipy tensorboardX h5py wandb plyfile tabulate
+    pip install numpy ipython psutil traitlets transformers termcolor ipdb scipy tensorboardX h5py wandb plyfile tabulate einops
     ```
 + **(2)** Install spacy for text parsing
   ```
