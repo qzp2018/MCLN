@@ -16,5 +16,4 @@ TORCH_DISTRIBUTED_DEBUG=INFO CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distri
     --checkpoint_path ~/DATA_ROOT/checkpoints/ckpt.pth \
     --max_epoch 100 \
     --model MCLN \
-    --small_lr \
     --exp MCLN \
